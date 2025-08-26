@@ -1,0 +1,185 @@
+.product-page {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .upload-section {
+          background: white;
+          border-radius: 12px;
+          padding: 30px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+          border: 1px solid #e5e7eb;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #1e40af;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        .upload-area {
+          border: 2px dashed #3b82f6;
+          border-radius: 8px;
+          padding: 40px 20px;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          background: #f8fafc;
+          margin-bottom: 20px;
+        }
+
+        .upload-area:hover {
+          border-color: #1e40af;
+          background: #eff6ff;
+        }
+
+        .upload-area.drag-over {
+          border-color: #f97316;
+          background: #fff7ed;
+        }
+
+        .upload-icon {
+          font-size: 3rem;
+          color: #3b82f6;
+          margin-bottom: 15px;
+        }
+
+        .upload-text {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: #374151;
+          margin-bottom: 8px;
+        }
+
+        .upload-subtext {
+          color: #6b7280;
+          font-size: 0.9rem;
+        }
+
+        .file-input {
+          display: none;
+        }
+
+        .image-preview {
+          text-align: center;
+          margin: 20px 0;
+        }
+
+        .preview-image {
+          max-width: 300px;
+          max-height: 300px;
+          border-radius: 8px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          border: 2px solid #f97316;
+        }
+
+        .button-group {
+          display: flex;
+          gap: 15px;
+          justify-content: center;
+          margin-top: 20px;
+        }
+
+        .upload-button {
+          background: linear-gradient(135deg, #f97316, #ea580c);
+          color: white;
+          border: none;
+          padding: 12px 30px;
+          font-size: 1rem;
+          font-weight: 600;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .upload-button:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+        }
+
+        .upload-button:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        .clear-button {
+          background: #6b7280;
+          color: white;
+          border: none;
+          padding: 12px 30px;
+          font-size: 1rem;
+          font-weight: 600;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .clear-button:hover {
+          background: #4b5563;
+          transform: translateY(-2px);
+        }
+
+        .message {
+          text-align: center;
+          padding: 15px;
+          border-radius: 8px;
+          margin-top: 15px;
+          font-weight: 600;
+        }
+
+        .message.success {
+          background: #d1fae5;
+          color: #065f46;
+          border: 1px solid #a7f3d0;
+        }
+
+        .message.error {
+          background: #fee2e2;
+          color: #991b1b;
+          border: 1px solid #fecaca;
+        }
+
+        .loading-spinner {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          border: 2px solid #ffffff;
+          border-radius: 50%;
+          border-top-color: transparent;
+          animation: spin 1s ease-in-out infinite;
+          margin-right: 8px;
+        }
+
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+
+        .file-info {
+          background: #f1f5f9;
+          padding: 15px;
+          border-radius: 8px;
+          margin: 15px 0;
+          text-align: center;
+        }
+
+        .file-name {
+          font-weight: 600;
+          color: #1e40af;
+          margin-bottom: 5px;
+        }
+
+        .file-size {
+          color: #64748b;
+          font-size: 0.9rem;
+        }
+        .augmented-preview {
+  width: 150px;
+  height: auto;
+  margin: 5px;
+  border: 1px solid #ccc;
+}
