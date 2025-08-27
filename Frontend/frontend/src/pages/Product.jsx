@@ -1,54 +1,50 @@
 import React, { useState, useRef } from 'react';
 import '../scripts/ProductCSS.css';
-
 const Product = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-  const [augmentedImages, setAugmentedImages] = useState([]); // new state
+  const [augmentedImages, setAugmentedImages] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadMessage, setUploadMessage] = useState('');
   const fileInputRef = useRef(null);
 
   const uploadToBackend = async () => {
-  if (!imageFile) {
-    setUploadMessage('Please select an image first');
-    return;
-  }
-
-  setIsUploading(true);
-  setUploadMessage('');
-
-  try {
-    const formData = new FormData();
-    formData.append('image', imageFile);
-
-    const response = await fetch('http://localhost:8000/api/upload/', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      setUploadMessage('Image uploaded successfully!');
-      console.log('Upload response:', result);
-
-      // Use the URLs returned by backend directly
-      if (result.augmented && result.augmented.length > 0) {
-        setAugmentedImages(result.augmented.map((url) => `http://localhost:8000${url}`));
-      }
-    } else {
-      setUploadMessage(result.error || 'Upload failed. Please try again.');
+    if (!imageFile) {
+      setUploadMessage('Please select an image first');
+      return;
     }
-  } catch (error) {
-    console.error('Upload error:', error);
-    setUploadMessage('Upload failed. Please check your connection.');
-  } finally {
-    setIsUploading(false);
-  }
-};
 
+    setIsUploading(true);
+    setUploadMessage('');
 
+    try {
+      const formData = new FormData();
+      formData.append('image', imageFile);
+
+      const response = await fetch('http://localhost:8000/api/upload/', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setUploadMessage('Image uploaded successfully!');
+        console.log('Upload response:', result);
+
+        if (result.augmented && result.augmented.length > 0) {
+          setAugmentedImages(result.augmented.map((url) => `http://localhost:8000${url}`));
+        }
+      } else {
+        setUploadMessage(result.error || 'Upload failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      setUploadMessage('Upload failed. Please check your connection.');
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -98,6 +94,17 @@ const Product = () => {
 
   return (
     <div className="product-page">
+      <nav className="navbar">
+        <div className="nav-content">
+          <div className="logo">DataAugment</div>
+          <ul className="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
       <div className="upload-section">
         <h2 className="section-title">Upload Image for Augmentation</h2>
 
@@ -139,53 +146,6 @@ const Product = () => {
           </div>
         )}
 
-        {augmentedImages.length > 0 && (
-  <div className="augmented-images">
-    <h3>Augmented Images:</h3>
-    <div className="augmented-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-      {augmentedImages.map((img, i) => (
-  <div key={i} style={{ marginBottom: '10px' }}>
-    <img src={img} alt={`augmented-${i}`} className="augmented-preview" />
-
-    <a
-      href={img}
-  download={`augmented-image-${i}.jpg`}
-  onClick={(e) => {
-    // For cross-origin images, use fetch method
-    e.preventDefault();
-    fetch(img)
-      .then(res => res.blob())
-      .then(blob => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `augmented-image-${i}.jpg`;
-        a.click();
-        URL.revokeObjectURL(url);
-      })
-      .catch(() => window.open(img, '_blank'));
-  }}
-  style={{
-    display: 'inline-block',
-    marginTop: '15px',
-    textDecoration: 'none',
-    color: '#fff',
-    background: '#007bff',
-    padding: '5px 10px',
-    borderRadius: '5px',
-  }}
->
-  Download
-</a>
-  </div>
-))}
-
-
-    </div>
-  </div>
-)}
-
-
         <div className="button-group">
           <button
             className="upload-button"
@@ -193,7 +153,7 @@ const Product = () => {
             disabled={!imageFile || isUploading}
           >
             {isUploading && <span className="loading-spinner"></span>}
-            {isUploading ? 'Uploading...' : 'Upload Image'}
+            {isUploading ? 'Processing...' : 'Upload & Augment'}
           </button>
 
           {selectedImage && (
@@ -208,23 +168,68 @@ const Product = () => {
             {uploadMessage}
           </div>
         )}
-      </div>
-      {/* {augmentedImages.length > 0 && (
-  <div className="augmented-images">
-    <h3>Augmented Images:</h3>
-    <div className="augmented-list">
-      {augmentedImages.map((img, i) => (
-        <img
-          key={i}
-          src={img}
-          alt={`augmented-${i}`}
-          className="augmented-preview"
-        />
-      ))}
-    </div>
-  </div>
-)} */}
 
+        {augmentedImages.length > 0 && (
+          <div className="augmented-images">
+            <h3>✨ Augmented Results</h3>
+            <div className="augmented-list">
+              {augmentedImages.map((img, i) => (
+  <div key={i} className="augmented-item">
+    <img src={img} alt={`augmented-${i}`} className="augmented-preview" />
+    <a
+      href={img}
+      download={`augmented-image-${i}.jpg`}
+      className="download-button"
+      onClick={(e) => {
+        e.preventDefault();
+        fetch(img)
+          .then(res => res.blob())
+          .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `augmented-image-${i}.jpg`;
+            a.click();
+            URL.revokeObjectURL(url);
+          })
+          .catch(() => window.open(img, '_blank'));
+      }}
+    >
+      📥 Download
+    </a>
+  </div>
+))}
+
+{/* Download All as ZIP button */}
+{augmentedImages.length > 0 && (
+  <div style={{ marginTop: "20px" }}>
+    <button
+      className="download-all-button"
+      onClick={async () => {
+        const JSZip = (await import("jszip")).default;
+        const { saveAs } = await import("file-saver");
+        const zip = new JSZip();
+
+        for (let i = 0; i < augmentedImages.length; i++) {
+          const response = await fetch(augmentedImages[i]);
+          const blob = await response.blob();
+          zip.file(`augmented-image-${i}.jpg`, blob);
+        }
+
+        zip.generateAsync({ type: "blob" }).then((content) => {
+          saveAs(content, "augmented-images.zip");
+        });
+      }}
+    >
+      📥 Download All as ZIP
+    </button>
+  </div>
+)}
+
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
