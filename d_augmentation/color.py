@@ -45,3 +45,59 @@ def solarize(image, threshold=128):
 def posterize(image, bits=4):
     shift = 8 - bits
     return ((image >> shift) << shift).astype(np.uint8)
+
+def all_color(
+    image,
+    apply_random=True,
+    brightness_factor=0.2,
+    contrast_factor=0.3,
+    saturation_factor=0.3,
+    hue_shift=10,
+    gamma_range=(0.8, 1.2),
+    grayscale_alpha=0.5,
+    solarize_threshold=128,
+    posterize_bits=4
+):
+    """
+    Apply all color transformations (brightness, contrast, saturation, hue, gamma correction,
+    grayscale, solarize, posterize) either sequentially or randomly.
+    """
+    transformed = image.copy()
+
+    # Brightness
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = adjust_brightness(transformed, brightness_factor)
+
+    # Contrast
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = adjust_contrast(transformed, contrast_factor)
+
+    # Saturation
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = adjust_saturation(transformed, saturation_factor)
+
+    # Hue Shift
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = shift_hue(transformed, hue_shift)
+
+    # Gamma Correction
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = gamma_correction(transformed, gamma_range)
+
+    # Color Jitter (combination of above)
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = color_jitter(transformed)
+
+    # Grayscale Blend
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = grayscale(transformed, grayscale_alpha)
+
+    # Solarize
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = solarize(transformed, solarize_threshold)
+
+    # Posterize
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = posterize(transformed, posterize_bits)
+
+    return clip(transformed)

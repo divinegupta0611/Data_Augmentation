@@ -32,3 +32,45 @@ def motion_blur(image, kernel_size=9):
 def defocus_blur(image, ksize=9):
     kernel = np.ones((ksize, ksize), np.float32) / (ksize * ksize)
     return cv2.filter2D(image, -1, kernel)
+
+def all_noise(
+    image,
+    apply_random=True,
+    mean=0,
+    std=10,
+    amount=0.01,
+    ksize=5,
+    motion_kernel=9,
+    defocus_kernel=9
+):
+    """
+    Apply all noise transformations (Gaussian, Salt & Pepper, Speckle, Blur, Motion Blur, Defocus Blur)
+    Sequentially or randomly depending on `apply_random`.
+    """
+    transformed = image.copy()
+
+    # Gaussian Noise
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = gaussian_noise(transformed, mean, std)
+
+    # Salt & Pepper Noise
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = salt_and_pepper(transformed, amount)
+
+    # Speckle Noise
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = speckle_noise(transformed)
+
+    # Gaussian Blur
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = gaussian_blur(transformed, ksize)
+
+    # Motion Blur
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = motion_blur(transformed, motion_kernel)
+
+    # Defocus Blur
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = defocus_blur(transformed, defocus_kernel)
+
+    return clip(transformed)

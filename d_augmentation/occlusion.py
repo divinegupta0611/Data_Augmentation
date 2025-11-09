@@ -48,3 +48,49 @@ def fmix(image1, image2, alpha=1.0):
     mask = cv2.GaussianBlur(mask, (15, 15), 5)
     mask = np.expand_dims(mask, axis=-1)
     return clip(mask * image1 + (1 - mask) * image2)
+
+def all_occlusion(
+    image1,
+    image2=None,
+    apply_random=True,
+    mask_size=50,
+    grid_size=4,
+    hide_prob=0.25,
+    gridmask_size=50,
+    gridmask_ratio=0.5,
+    alpha=0.4
+):
+    """
+    Apply all occlusion transformations (Cutout, Hide-and-Seek, GridMask, Mixup, CutMix, FMix)
+    Sequentially or randomly depending on `apply_random`.
+    If using mixup/cutmix/fmix, provide a second image (image2).
+    """
+    transformed = image1.copy()
+
+    # Cutout
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = cutout(transformed, mask_size)
+
+    # Hide and Seek
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = hide_and_seek(transformed, grid_size, hide_prob)
+
+    # GridMask
+    if not apply_random or np.random.rand() > 0.5:
+        transformed = gridmask(transformed, gridmask_size, gridmask_ratio)
+
+    # For these, we need another image
+    if image2 is not None:
+        # Mixup
+        if not apply_random or np.random.rand() > 0.5:
+            transformed = mixup(transformed, image2, alpha)
+
+        # CutMix
+        if not apply_random or np.random.rand() > 0.5:
+            transformed = cutmix(transformed, image2)
+
+        # FMix
+        if not apply_random or np.random.rand() > 0.5:
+            transformed = fmix(transformed, image2)
+
+    return clip(transformed)
