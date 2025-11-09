@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="data_augmentation",
-    version="0.1.0",
+    name="d_augmentation",
+    version="0.1.2",
     author="Divine Gupta",
     author_email="guptadivine0611@gmail.com",
     description="Comprehensive image data augmentation library with geometric, color, noise, and occlusion techniques",

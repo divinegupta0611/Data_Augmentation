@@ -1,0 +1,31 @@
+Metadata-Version: 2.4
+Name: d_augmentation
+Version: 0.1.2
+Summary: Comprehensive image data augmentation library with geometric, color, noise, and occlusion techniques
+Author: Divine Gupta
+Author-email: guptadivine0611@gmail.com
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: opencv-python
+Requires-Dist: numpy
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Data_Augmentation
+
+A complete Python library for advanced image data augmentation â€” including geometric, color, noise, and occlusion-based transformations.
+
+### Features
+âœ… Flip, Rotate, Scale, Shear, Crop, Perspective, Elastic Deformation  
+âœ… Brightness, Contrast, Hue, Gamma, Solarize, Posterize  
+âœ… Gaussian, Speckle, Motion, Defocus, Salt & Pepper Noise  
+âœ… Cutout, Hide-and-Seek, GridMask, Mixup, CutMix, FMix  
+
+### Installation
+```bash
+pip install -e .
