@@ -1,0 +1,3 @@
+cityscape.jpg: recommendations -> flip, rotate, crop, color_jitter, posterize, solarize, adjust_brightness, scale
+images.jpeg: recommendations -> flip, rotate, crop, color_jitter, posterize, solarize, adjust_brightness, scale
+lena.png: recommendations -> flip, rotate, color_jitter, posterize, solarize, adjust_contrast, scale

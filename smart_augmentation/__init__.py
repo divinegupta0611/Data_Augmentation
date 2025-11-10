@@ -1,3 +1,4 @@
+# smart_augmentation/__init__.py
 from . import geometric
 from . import color
 from . import noise

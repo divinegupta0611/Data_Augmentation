@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
-Name: d_augmentation
-Version: 0.1.2
+Name: smart_augmentation
+Version: 0.1.5
 Summary: Comprehensive image data augmentation library with geometric, color, noise, and occlusion techniques
 Author: Divine Gupta
 Author-email: guptadivine0611@gmail.com
