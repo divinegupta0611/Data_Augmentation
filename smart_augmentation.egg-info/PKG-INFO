@@ -1,7 +1,7 @@
 Metadata-Version: 2.4
 Name: smart_augmentation
-Version: 0.2.1
-Summary: Comprehensive image and video data augmentation library with AI-powered recommendations, geometric, color, noise, and occlusion techniques
+Version: 0.2.2
+Summary: Comprehensive image and video data augmentation library with recommendations, geometric, color, noise, and occlusion techniques
 Author: Divine Gupta
 Author-email: guptadivine0611@gmail.com
 Keywords: image-augmentation video-augmentation data-augmentation computer-vision deep-learning ai machine-learning
@@ -24,23 +24,8 @@ Requires-Dist: numpy>=1.19.0
 Dynamic: author
 Dynamic: author-email
 Dynamic: classifier
-Dynamic: description
 Dynamic: description-content-type
 Dynamic: keywords
 Dynamic: requires-dist
 Dynamic: requires-python
 Dynamic: summary
-
-# Data_Augmentation
-
-A complete Python library for advanced image data augmentation â€” including geometric, color, noise, and occlusion-based transformations.
-
-### Features
-âœ… Flip, Rotate, Scale, Shear, Crop, Perspective, Elastic Deformation  
-âœ… Brightness, Contrast, Hue, Gamma, Solarize, Posterize  
-âœ… Gaussian, Speckle, Motion, Defocus, Salt & Pepper Noise  
-âœ… Cutout, Hide-and-Seek, GridMask, Mixup, CutMix, FMix  
-
-### Installation
-```bash
-pip install -e .
