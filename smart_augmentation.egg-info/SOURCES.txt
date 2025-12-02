@@ -10,5 +10,4 @@ smart_augmentation/video.py
 smart_augmentation.egg-info/PKG-INFO
 smart_augmentation.egg-info/SOURCES.txt
 smart_augmentation.egg-info/dependency_links.txt
-smart_augmentation.egg-info/requires.txt
 smart_augmentation.egg-info/top_level.txt

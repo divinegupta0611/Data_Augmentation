@@ -75,7 +75,6 @@ image_path = "Dataset/sample1.jpg"  # change as needed
 image = utils.load_image(image_path)
 analysis = utils.analyze_image(image)
 print("🔹 Image Analysis:")
-pprint.pprint(analysis)
 
 # -------------------------------
 # Test analyze_image_for_transforms
@@ -89,7 +88,7 @@ print(transform_recs)
 # -------------------------------
 report = utils.generate_report_for_folder(dataset_path, report_path)
 print("\n📄 Generated Report:")
-pprint.pprint(report)
+print(report)
 
 # -------------------------------
 # Test apply_transform_by_name
@@ -98,6 +97,7 @@ transformed = utils.apply_transform_by_name(image, "rotate", angle=15)
 print("\n✅ Applied single transform (rotate)")
 # Show inline in Jupyter
 from matplotlib import pyplot as plt
+import cv2
 plt.imshow(cv2.cvtColor(transformed, cv2.COLOR_BGR2RGB))
 plt.title("Rotated Image")
 plt.axis('off')
@@ -114,7 +114,7 @@ analysis, saved_files = utils.process_single_image(
 print("\n📊 Single Image Analysis:")
 pprint.pprint(analysis)
 print("\n🖼️ Saved Files:")
-pprint.pprint(saved_files)
+print(saved_files)
 
 # -------------------------------
 # Test apply_transformations_to_dataset
